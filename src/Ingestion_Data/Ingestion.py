@@ -15,8 +15,3 @@ def Consumer(server,topic,auto_offset_reset,groupID):
     consumer=KafkaConsumer(topic,bootstrap_servers=[server+':9092'],auto_offset_reset=auto_offset_reset,enable_auto_commit=True,group_id=groupID)
     consumer.subscribe([topic])
     return consumer
-
-def datos(id):
-    fake=Faker()
-    data={"id":id,"texto":fake.text(),"name": fake.name()}
-    return data
