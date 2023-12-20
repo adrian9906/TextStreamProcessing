@@ -8,6 +8,7 @@ from db.Find import findDoc
 from Processing.Pre_processing.pre_process import WordTokenizer
 from Clasification.NaiveBayes import PredictNaiveBayes, trainingNaiveBayes
 from Clustering.K_means import clusterinK_means
+from Clasification.LogisticRegression import PredictLR, trainingLR
 
 
 if __name__=="__main__":
@@ -25,14 +26,14 @@ if __name__=="__main__":
             data.append(i['Article text'])
             label.append(i['Category'])
     
-    # data_train, data_test, label_train, label_test = train_test_split(data, label, test_size=0.2, random_state=42)
+    data_train, data_test, label_train, label_test = train_test_split(data, label, test_size=0.2, random_state=42)
 
     
     # naiveBayesPipeline = trainingNaiveBayes(data_train,label_train)
     
     # naiveBayes = PredictNaiveBayes(naiveBayesPipeline,data_test)
     
-    # dataList=[]
+    dataList=[]
     
     # for i in range(0,len(data_test)):
     #     dicData={"text":data_test[i],
@@ -51,9 +52,27 @@ if __name__=="__main__":
     
     # print(f"The accuracy of the model is: {round((accuracy*100),ndigits=2)} %")
     
-    clusters = len(set(label))
+    # clusters = len(set(label))
 
-    k_means = clusterinK_means(data,clusters)
+    # k_means = clusterinK_means(data,clusters)
     
-    for labels,cluster in k_means.items():
-        print(f"Label {label}")
+    # for labels,cluster in k_means.items():
+    #     print(f"Label {label}")
+    
+    modelLR = trainingLR(data_train, label_train)
+    
+    dataLR = PredictLR(modelLR, data_test)
+    
+    for i in range(0,len(data_test)):
+        dicData={"text":data_test[i],
+               "Predicction":dataLR[i]}
+        dataList.append(dicData)
+        
+        
+    df = pd.DataFrame(dataList)
+    
+    accuracy = accuracy_score(dataLR, label_test)
+    
+    print(df)
+    
+    print(f"The accuracy of the model is: {round((accuracy*100),ndigits=2)} %")
