@@ -19,3 +19,7 @@ def PredictLR(pipeline, text):
     dfPredict = pipeline.predict(text)
    
     return dfPredict
+
+def trainWordEmeddings(wordEmedding,labels):
+    clf = LogisticRegression(max_iter=1000)
+    return clf.fit(wordEmedding, labels)
