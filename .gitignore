@@ -1,1 +1,4 @@
 *.pyc
+BertModel.py
+BertClasification.py
+word2Vec_Model.py
