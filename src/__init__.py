@@ -20,12 +20,12 @@ if __name__=="__main__":
     
     label = []
     
-    a = findDoc("PruebaSpark",'AmazonReviewEnglish')
+    a = findDoc("ClasificationDataset","CNN_News_Articles")
     
     for i in a:
-        if 'text' in i:
-            data.append(i['text'])
-            label.append(i['clase'])
+        if 'Article text' in i:
+            data.append(i['Article text'])
+            label.append(i['Category'])
     
     data_train, data_test, label_train, label_test = train_test_split(data, label, test_size=0.2, random_state=42)
     dataList=[]
