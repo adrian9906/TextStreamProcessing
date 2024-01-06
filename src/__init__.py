@@ -10,6 +10,8 @@ from Clasification.NaiveBayes import PredictNaiveBayes, trainingNaiveBayes
 from Clustering.K_means import clusterinK_means
 from Clasification.LogisticRegression import PredictLR, trainWordEmeddings, trainingLR
 from Processing.Feature_Selection.WordEmbeddings.word2Vec_Model import trainWord2Vec
+from Clasification.BertClasification import Ber_Clasification_Train, PredictBertClasification
+from Processing.Feature_Selection.WordEmbeddings.BertModel import loadBertModel
 
 
 if __name__=="__main__":
@@ -86,17 +88,27 @@ if __name__=="__main__":
     
     ############### Logistic Regression word2vec ###################
     
-    arrayWord2vec = trainWord2Vec(data_train)
+    # arrayWord2vec = trainWord2Vec(data_train)
     
-    arrayWord2vecTest = trainWord2Vec(data_test)
+    # arrayWord2vecTest = trainWord2Vec(data_test)
     
-    modelLRW2V = trainWordEmeddings(arrayWord2vec, label_train)
+    # modelLRW2V = trainWordEmeddings(arrayWord2vec, label_train)
     
-    pred = modelLRW2V.predict(arrayWord2vecTest)
+    # pred = modelLRW2V.predict(arrayWord2vecTest)
     
-    accuracy = accuracy_score(pred, label_test)
+    # accuracy = accuracy_score(pred, label_test)
     
-    print(f"The accuracy of the model is: {round((accuracy*100),ndigits=2)} %")
+    # print(f"The accuracy of the model is: {round((accuracy*100),ndigits=2)} %")
     
+tokenizer, model = loadBertModel(label)
+modelo, labelCoder = Ber_Clasification_Train(data_train,label_train,model, tokenizer)
+
+df2, lab2 = PredictBertClasification(data_test, modelo, labelCoder, tokenizer)
+
+print(df2)
+
+accuracy = accuracy_score(df2['label'], label_test)
+
+print(accuracy)
     
     
