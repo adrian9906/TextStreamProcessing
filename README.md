@@ -12,6 +12,7 @@ The project uses the "cnn-articles" dataset available on [Kaggle](https://www.ka
 2. Text clustering using the K-Means algorithm.
 3. Use of Word2Vec for classification with Logistic Regression.
 4. Use of TF-IDF for Naive Bayes and Logistic Regression.
+5. Text clasificaction using Bert Transformer model.
 
 ***
 
@@ -22,6 +23,7 @@ This project requires the following Python libraries:
 3. NLTK
 4. Gensim
 5. pymongo
+6. Trasformers
 
 ***
 
@@ -44,6 +46,7 @@ The accuracy results of the classifiers are as follows:
 1. Naive Bayes: 85%
 2. Logistic Regression: 92%
 3. Logistic Regression with Word2Vect: 60%
+4. Bert Clasification: 84%
 
 # Contributing
 Contributions are welcome. Please open a pull request if you wish to contribute to the project.
